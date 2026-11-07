@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Post &amp; Web Story Maker</title>
+<meta name="description" content="Create Instagram posts and Google Web Story images with ready-made templates.">
+<meta name="theme-color" content="#0f2a4a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PostMaker">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Kalam:wght@400;700&family=Anton&family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,700&family=Hind:wght@400;500;600;700&family=Mukta:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Baloo+2:wght@400;500;600;700;800&family=Laila:wght@400;500;600;700&family=Khand:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&family=Rozha+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<div class="card form">
+<h1>🎨 Post & Web Story Maker</h1><p class="s">Add a heading, description and image to create a professional post.</p>
+<div id="pwa" class="pwa" hidden>
+<div id="pwas"></div>
+<div class="row" style="margin-top:8px"><button class="chip" id="pwai" hidden>⬇ Install app</button><button class="chip" id="pwah">Install help</button></div>
+<div id="pwahelp" hidden>
+<div id="pwad" class="note" style="margin:0 0 6px"></div>
+<ol>
+<li>If the browser says <b>"already installed"</b> but you cannot find the app: on Android open <b>Settings → Apps</b>, find "Post &amp; Web Story Maker" (or "PostMaker") and tap <b>Uninstall</b>. On a PC open <b>chrome://apps</b> (or edge://apps), right-click the app and choose <b>Remove</b>.</li>
+<li>Tap <b>Reset app cache</b> below, then open the page again. Your saved projects and posts are <b>not</b> deleted.</li>
+<li>Keep this app in its own folder or domain. Do not host it in the same place as another app.</li>
+<li>iPhone / iPad: open in Safari, tap <b>Share → Add to Home Screen</b>.</li>
+</ol>
+<button class="chip" id="pwar">Reset app cache</button>
+</div>
+</div>
+<label>Format</label><div class="row" id="fmt"></div>
+<label>Template</label><div class="row" id="tpl"></div>
+<label>Fonts <span>(Template default keeps each design's own font)</span></label>
+<div class="row" style="align-items:flex-start"><div style="flex:1;min-width:150px"><div class="note" style="margin:0 0 4px">Heading font</div><select id="hf"></select></div><div style="flex:1;min-width:150px"><div class="note" style="margin:0 0 4px">Description font</div><select id="df"></select></div></div>
+<div id="mm" class="mmbox" hidden>
+<label>Mind map layout</label><div class="row" id="dir"></div>
+<label>Children <span>(text + optional image, max 8)</span></label>
+<div id="kl"></div>
+<button class="chip" id="kadd" style="width:100%;margin-top:8px">+ Add child</button>
+<div class="note">The Heading and Image below become the main node.</div>
+</div>
+<label>Heading <span>(*word* = highlight 1, _word_ = highlight 2)</span></label>
+<input type="text" id="h" placeholder="Enter heading">
+<div class="row" style="margin-top:8px;gap:6px"><label style="display:flex;gap:6px;align-items:center;margin:0;color:var(--tx)"><input type="checkbox" id="nshow"> Number</label><input type="text" id="nn" inputmode="numeric" placeholder="1" style="width:64px"><span class="note" style="margin:0">of</span><input type="text" id="nt" inputmode="numeric" placeholder="total" style="width:64px"></div>
+<div class="row" id="nstyle" style="margin-top:6px"></div>
+<label>Heading 2 <span>(Illustration 2 · Testimonial role)</span></label>
+<input type="text" id="h2" placeholder="Enter second heading">
+<label>Description <span>(press Enter for bullet points)</span></label>
+<textarea id="d" placeholder="Enter description"></textarea>
+<label>Description alignment</label><div class="row" id="dal"></div>
+<div class="note" id="tnote" hidden></div>
+<div class="note" id="tipn" hidden>Numbered Tips: each description line becomes one numbered tip.</div>
+<div id="rw" hidden><label>Star rating</label><div class="row" id="rate"></div></div>
+<div id="d2w" hidden><label>Don't points <span>(Do / Don't template · Description = Do points)</span></label><textarea id="d2" placeholder="Enter points to avoid"></textarea></div>
+<label>Image</label>
+<div class="row"><input type="file" id="f" accept="image/*"><button class="chip rm" id="r1">Remove</button></div>
+<label>Second Image <span>(Illustration · Before/After)</span></label>
+<div class="row"><input type="file" id="f2" accept="image/*"><button class="chip rm" id="r2">Remove</button></div>
+<label>Brand / Handle <span>(optional)</span></label>
+<input type="text" id="b" placeholder="@yourhandle">
+<label>Logo / Watermark <span>(optional)</span></label>
+<div class="row"><input type="file" id="fl" accept="image/*"><button class="chip rm" id="rl">Remove</button></div>
+<div id="lopt" hidden><label>Logo position</label><div class="row" id="lpos"></div><label>Logo size</label><div class="row" id="lsz"></div><label>Logo opacity</label><div class="row" id="lop"></div></div>
+<label>Accent Color</label>
+<div class="row colors" id="col"></div>
+<label>Highlight 2 Color <span>(_word_)</span></label>
+<div class="row colors" id="col2"></div>
+<button class="btn" id="dl">⬇ Download PNG</button>
+<div class="note" id="msg"></div>
+<div class="note" id="ds"></div>
+</div>
+<div class="pvw">
+<div class="pv"><canvas id="c"></canvas><div id="empty" class="empty"><span>Type a heading or add an image to see your post here</span></div></div>
+<button class="btn" id="dl2">⬇ Download PNG</button>
+</div>
+<div class="side">
+<div class="card">
+<b id="bt">My Projects</b>
+<div class="row" style="margin-top:10px"><select id="pj"></select><button class="chip rm" id="pdel">Delete</button></div>
+<div class="row" style="margin-top:8px"><input type="text" id="pn" placeholder="Project name"><button class="chip rm" id="pnew">Create</button><button class="chip rm" id="pren">Rename</button></div>
+<div class="row" style="margin-top:10px"><button class="chip" id="add">+ Add current post</button><button class="chip rm" id="cancel" hidden>Cancel edit</button><button class="chip" id="zipb">⬇ Download all (ZIP)</button></div>
+<div class="note" id="msg2"></div>
+<div id="bl"></div>
+</div>
+</div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script src="app.js" defer></script>
+</body>
+</html>
